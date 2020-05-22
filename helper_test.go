@@ -2,7 +2,7 @@ package yaccpragmaids
 
 type lexem struct {
 	token int
-	data  interface{}
+	data  string
 }
 
 type YaccPragmaIdsLexerImpl struct {
@@ -10,6 +10,15 @@ type YaccPragmaIdsLexerImpl struct {
 	data         []lexem
 	error        bool
 	errorMessage string
+	version      ITypeVersion
+}
+
+func (y *YaccPragmaIdsLexerImpl) GetTypeValue() ITypeVersion {
+	return y.version
+}
+
+func (y *YaccPragmaIdsLexerImpl) SetTypeValue(version ITypeVersion) {
+	y.version = version
 }
 
 func NewYaccYaccPragmaIdsLexerImpl(pos int, data []lexem) *YaccPragmaIdsLexerImpl {
@@ -24,14 +33,11 @@ func (y *YaccPragmaIdsLexerImpl) Lex(lval *YaccPragmaIdsSymType) int {
 	if y.pos == len(y.data)+1 {
 		return 0
 	}
-	//switch y.data[y.pos-1].token {
-	//case StringLiteral, Identifier:
-	//	if s, ok := y.data[y.pos-1].data.(string); ok {
-	//		lval.StringLiteral = s
-	//	}
-	//	return y.data[y.pos-1].token
-	//
-	//}
+	switch y.data[y.pos-1].token {
+	case Value:
+		lval.Value = y.data[y.pos-1].data
+		return y.data[y.pos-1].token
+	}
 
 	return y.data[y.pos-1].token
 

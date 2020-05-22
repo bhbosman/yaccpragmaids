@@ -1,0 +1,197 @@
+
+state 0
+	$accept: .id_spec $end 
+
+	RWIdl  shift 2
+	RWLocal  shift 3
+	RWRmi  shift 5
+	RWDce  shift 4
+	.  error
+
+	id_spec  goto 1
+
+state 1
+	$accept:  id_spec.$end 
+
+	$end  accept
+	.  error
+
+
+state 2
+	id_spec:  RWIdl.':' Value ':' version 
+
+	':'  shift 6
+	.  error
+
+
+state 3
+	id_spec:  RWLocal.':' Value 
+
+	':'  shift 7
+	.  error
+
+
+state 4
+	id_spec:  RWDce.':' Value ':' version 
+
+	':'  shift 8
+	.  error
+
+
+state 5
+	id_spec:  RWRmi.':' Value ':' Value 
+	id_spec:  RWRmi.':' Value ':' Value ':' Value 
+
+	':'  shift 9
+	.  error
+
+
+state 6
+	id_spec:  RWIdl ':'.Value ':' version 
+
+	Value  shift 10
+	.  error
+
+
+state 7
+	id_spec:  RWLocal ':'.Value 
+
+	Value  shift 11
+	.  error
+
+
+state 8
+	id_spec:  RWDce ':'.Value ':' version 
+
+	Value  shift 12
+	.  error
+
+
+state 9
+	id_spec:  RWRmi ':'.Value ':' Value 
+	id_spec:  RWRmi ':'.Value ':' Value ':' Value 
+
+	Value  shift 13
+	.  error
+
+
+state 10
+	id_spec:  RWIdl ':' Value.':' version 
+
+	':'  shift 14
+	.  error
+
+
+state 11
+	id_spec:  RWLocal ':' Value.    (2)
+
+	.  reduce 2 (src line 34)
+
+
+state 12
+	id_spec:  RWDce ':' Value.':' version 
+
+	':'  shift 15
+	.  error
+
+
+state 13
+	id_spec:  RWRmi ':' Value.':' Value 
+	id_spec:  RWRmi ':' Value.':' Value ':' Value 
+
+	':'  shift 16
+	.  error
+
+
+state 14
+	id_spec:  RWIdl ':' Value ':'.version 
+
+	Value  shift 18
+	.  error
+
+	version  goto 17
+
+state 15
+	id_spec:  RWDce ':' Value ':'.version 
+
+	Value  shift 18
+	.  error
+
+	version  goto 19
+
+state 16
+	id_spec:  RWRmi ':' Value ':'.Value 
+	id_spec:  RWRmi ':' Value ':'.Value ':' Value 
+
+	Value  shift 20
+	.  error
+
+
+state 17
+	id_spec:  RWIdl ':' Value ':' version.    (1)
+
+	.  reduce 1 (src line 26)
+
+
+state 18
+	version:  Value.    (6)
+	version:  Value.'.' 
+	version:  Value.'.' Value 
+
+	'.'  shift 21
+	.  reduce 6 (src line 90)
+
+
+state 19
+	id_spec:  RWDce ':' Value ':' version.    (3)
+
+	.  reduce 3 (src line 41)
+
+
+state 20
+	id_spec:  RWRmi ':' Value ':' Value.    (4)
+	id_spec:  RWRmi ':' Value ':' Value.':' Value 
+
+	':'  shift 22
+	.  reduce 4 (src line 52)
+
+
+state 21
+	version:  Value '.'.    (7)
+	version:  Value '.'.Value 
+
+	Value  shift 23
+	.  reduce 7 (src line 100)
+
+
+state 22
+	id_spec:  RWRmi ':' Value ':' Value ':'.Value 
+
+	Value  shift 24
+	.  error
+
+
+state 23
+	version:  Value '.' Value.    (8)
+
+	.  reduce 8 (src line 109)
+
+
+state 24
+	id_spec:  RWRmi ':' Value ':' Value ':' Value.    (5)
+
+	.  reduce 5 (src line 68)
+
+
+10 terminals, 3 nonterminals
+9 grammar rules, 25/8000 states
+0 shift/reduce, 0 reduce/reduce conflicts reported
+52 working sets used
+memory: parser 2/120000
+0 extra closures
+22 shift entries, 1 exceptions
+3 goto entries
+0 entries saved by goto default
+Optimizer space used: output 24/120000
+24 table entries, 0 zero
+maximum spread: 10, maximum offset: 15

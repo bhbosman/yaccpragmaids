@@ -5,14 +5,14 @@ import (
 	"testing"
 )
 
-func TestPragmaIdIdl(t *testing.T) {
+func TestPragmaIdDCE(t *testing.T) {
 	t.Run("", func(t *testing.T) {
 		lexer := NewYaccYaccPragmaIdsLexerImpl(
 			0,
 			[]lexem{
-				{token: RWIdl, data: ""},
+				{token: RWDce, data: ""},
 				{token: ':', data: ""},
-				{token: Value, data: "A"},
+				{token: Value, data: "167641ce-3194-4999-af0e-115fb5630204"},
 				{token: ':', data: ""},
 				{token: Value, data: "1"},
 				{token: '.', data: ""},
@@ -25,13 +25,13 @@ func TestPragmaIdIdl(t *testing.T) {
 			return
 		}
 		assert.NotNil(t, lexer.GetTypeValue())
-		assert.Equal(t, "IDL", lexer.GetTypeValue().VersionType())
-		if !assert.Implements(t, (*IIdlVersion)(nil), lexer.GetTypeValue()) {
+		assert.Equal(t, "DCE", lexer.GetTypeValue().VersionType())
+		if !assert.Implements(t, (*IDceVersion)(nil), lexer.GetTypeValue()) {
 			return
 		}
-		node, ok1 := lexer.GetTypeValue().(IIdlVersion)
+		node, ok1 := lexer.GetTypeValue().(IDceVersion)
 		assert.True(t, ok1)
-		assert.Equal(t, "A", node.Identifier())
+		assert.Equal(t, "167641ce-3194-4999-af0e-115fb5630204", node.Identifier())
 		assert.Equal(t, uint64(1), node.Value().Major())
 		assert.Equal(t, uint64(0), node.Value().Minor())
 	})
@@ -39,9 +39,9 @@ func TestPragmaIdIdl(t *testing.T) {
 		lexer := NewYaccYaccPragmaIdsLexerImpl(
 			0,
 			[]lexem{
-				{token: RWIdl, data: ""},
+				{token: RWDce, data: ""},
 				{token: ':', data: ""},
-				{token: Value, data: "A"},
+				{token: Value, data: "167641ce-3194-4999-af0e-115fb5630204"},
 				{token: ':', data: ""},
 				{token: Value, data: "1"},
 				{token: '.', data: ""},
@@ -53,13 +53,13 @@ func TestPragmaIdIdl(t *testing.T) {
 			return
 		}
 		assert.NotNil(t, lexer.GetTypeValue())
-		assert.Equal(t, "IDL", lexer.GetTypeValue().VersionType())
-		if !assert.Implements(t, (*IIdlVersion)(nil), lexer.GetTypeValue()) {
+		assert.Equal(t, "DCE", lexer.GetTypeValue().VersionType())
+		if !assert.Implements(t, (*IDceVersion)(nil), lexer.GetTypeValue()) {
 			return
 		}
-		node, ok1 := lexer.GetTypeValue().(IIdlVersion)
+		node, ok1 := lexer.GetTypeValue().(IDceVersion)
 		assert.True(t, ok1)
-		assert.Equal(t, "A", node.Identifier())
+		assert.Equal(t, "167641ce-3194-4999-af0e-115fb5630204", node.Identifier())
 		assert.Equal(t, uint64(1), node.Value().Major())
 		assert.Equal(t, uint64(0), node.Value().Minor())
 	})
@@ -67,9 +67,9 @@ func TestPragmaIdIdl(t *testing.T) {
 		lexer := NewYaccYaccPragmaIdsLexerImpl(
 			0,
 			[]lexem{
-				{token: RWIdl, data: ""},
+				{token: RWDce, data: ""},
 				{token: ':', data: ""},
-				{token: Value, data: "A"},
+				{token: Value, data: "167641ce-3194-4999-af0e-115fb5630204"},
 				{token: ':', data: ""},
 				{token: Value, data: "1"},
 			})
@@ -80,13 +80,13 @@ func TestPragmaIdIdl(t *testing.T) {
 			return
 		}
 		assert.NotNil(t, lexer.GetTypeValue())
-		assert.Equal(t, "IDL", lexer.GetTypeValue().VersionType())
-		if !assert.Implements(t, (*IIdlVersion)(nil), lexer.GetTypeValue()) {
+		assert.Equal(t, "DCE", lexer.GetTypeValue().VersionType())
+		if !assert.Implements(t, (*IDceVersion)(nil), lexer.GetTypeValue()) {
 			return
 		}
-		node, ok1 := lexer.GetTypeValue().(IIdlVersion)
+		node, ok1 := lexer.GetTypeValue().(IDceVersion)
 		assert.True(t, ok1)
-		assert.Equal(t, "A", node.Identifier())
+		assert.Equal(t, "167641ce-3194-4999-af0e-115fb5630204", node.Identifier())
 		assert.Equal(t, uint64(1), node.Value().Major())
 		assert.Equal(t, uint64(0), node.Value().Minor())
 	})
